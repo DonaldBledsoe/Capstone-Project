@@ -23,7 +23,7 @@ if __name__ == '__main__':
     # Schema definition for all of the payment order history tables
     table_schema = {
         'fields': [
-            {'name': 'order_id', 'type': 'INTEGER', 'mode': 'nullable'},
+            {'name': 'name', 'type': 'STRING', 'mode': 'nullable'},
             {'name': 'last_name', 'type': 'STRING', 'mode': 'nullable'}
 
         ]
