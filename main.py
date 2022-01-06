@@ -23,7 +23,7 @@ if __name__ == '__main__':
     # Schema definition for all of the payment order history tables
     table_schema = {
         'fields': [
-            {'name': 'name', 'type': 'STRING', 'mode': 'nullable'},
+            {'name': 'order_id', 'type': 'INTEGER', 'mode': 'nullable'},
             {'name': 'last_name', 'type': 'STRING', 'mode': 'nullable'}
 
         ]
@@ -45,7 +45,7 @@ if __name__ == '__main__':
     with beam.Pipeline(options=pipeline_options) as pipeline:
         data3 = (
                 pipeline | 'Query tables' >> beam.io.ReadFromBigQuery(
-                    query='SELECT table1.name, table2.last_name FROM york-cdf-start.bigquerypython.bqtable1 as table1 '
+                    query='SELECT table1.order_id, table2.last_name FROM york-cdf-start.bigquerypython.bqtable1 as table1 '
                            'join york-cdf-start.bigquerypython.bqtable4 as table2 on table1.order_id = table2.order_id', project="york-cdf-start",use_standard_sql=True)
         )
 
@@ -59,7 +59,7 @@ if __name__ == '__main__':
             schema=table_schema,
             create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
             write_disposition=beam.io.BigQueryDisposition.WRITE_APPEND,
-            method="STREAMING_INSERTS"
+
         )
 
         # GBP_Orders | "Write2" >> beam.io.WriteToBigQuery(
