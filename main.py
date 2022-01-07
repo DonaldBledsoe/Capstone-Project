@@ -61,7 +61,7 @@ if __name__ == '__main__':
                         'join york-cdf-start.bigquerypython.bqtable4 as table2 on table1.order_id = table2.order_id', project="york-cdf-start", use_standard_sql=True)
             )
 
-        # Outputting the tables to BigQuery.
+        # Outputting the two tables to BigQuery.
         data3 | "Write1" >> beam.io.WriteToBigQuery(
             table_spec1,
             schema=table_schema1,
@@ -76,6 +76,4 @@ if __name__ == '__main__':
             create_disposition=beam.io.BigQueryDisposition.CREATE_IF_NEEDED,
             write_disposition=beam.io.BigQueryDisposition.WRITE_APPEND,
 
-
         )
-
